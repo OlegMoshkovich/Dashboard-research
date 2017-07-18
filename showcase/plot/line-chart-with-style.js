@@ -27,14 +27,16 @@ import {
   YAxis,
   HorizontalGridLines,
   VerticalGridLines,
-  LineSeries
+  LineSeries,
+  DiscreteColorLegend,
+  Crosshair
 } from 'index';
 
 export default class Example extends React.Component {
   render() {
     return (
       <XYPlot
-        width={300}
+        width={1000}
         height={300}>
         <HorizontalGridLines style={{stroke: '#B7E9ED'}}/>
         <VerticalGridLines style={{stroke: '#B7E9ED'}}/>
@@ -44,43 +46,73 @@ export default class Example extends React.Component {
           text: {stroke: 'none', fill: '#6b6b76', fontWeight: 600}
         }}/>
         <YAxis title="Y Axis" />
-        <LineSeries
+
+
+      <LineSeries
           className="first-series"
-          data={[
-            {x: 1, y: 3},
-            {x: 2, y: 5},
-            {x: 3, y: 15},
-            {x: 4, y: 12}
-          ]}
+          data={this.props.data.Falls}
+          curve={curveCatmullRom.alpha(0.5)}
           style={{
             strokeLinejoin: 'round',
-            strokeWidth: 4
+            strokeWidth: 2,
+            stroke: '#e05038'
           }}
         />
         <LineSeries
-          className="second-series"
-          data={null}/>
-        <LineSeries
-          className="third-series"
-          curve={'curveMonotoneX'}
-          strokeDasharray="3 4"
-          data={[
-            {x: 1, y: 10},
-            {x: 2, y: 4},
-            {x: 3, y: 2},
-            {x: 4, y: 15}
-          ]}
-          strokeDasharray="7, 3"
-          />
-        <LineSeries
-          className="fourth-series"
+          className="first-series"
+          data={this.props.data.StruckBys}
           curve={curveCatmullRom.alpha(0.5)}
-          data={[
-            {x: 1, y: 7},
-            {x: 2, y: 11},
-            {x: 3, y: 9},
-            {x: 4, y: 2}
-          ]}/>
+          style={{
+            strokeLinejoin: 'round',
+            strokeWidth: 2,
+            stroke: "#334431"
+          }}
+        />
+
+        <LineSeries
+          className="first-series"
+          data={this.props.data.Bends}
+          curve={curveCatmullRom.alpha(0.5)}
+          style={{
+            strokeLinejoin: 'round',
+            strokeWidth: 1,
+            stroke: "#252839"
+          }}
+        />
+
+        <LineSeries
+          className="first-series"
+          data={this.props.data.Twists}
+          curve={curveCatmullRom.alpha(0.5)}
+          style={{
+            strokeLinejoin: 'round',
+            strokeWidth: 1,
+            stroke: "#f2b632"
+          }}
+        />
+
+        <LineSeries
+          className="first-series"
+          data={this.props.data.Reaches}
+          curve={curveCatmullRom.alpha(0.5)}
+          style={{
+            strokeLinejoin: 'round',
+            strokeWidth: 1,
+            stroke: "#b5b5b7"
+          }}
+        />
+
+        <LineSeries
+          className="first-series"
+          data={this.props.data.Squats}
+          curve={curveCatmullRom.alpha(0.5)}
+          style={{
+            strokeLinejoin: 'round',
+            strokeWidth: 1,
+            stroke: "#677077"
+          }}
+        />
+
       </XYPlot>
     );
   }

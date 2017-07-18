@@ -3,7 +3,7 @@
   "description": "Showcase of react-vis components",
   "version": "0.1.0",
   "scripts": {
-    "start": "webpack-dev-server --progress --hot --port 3001 --open",
+    "start": "webpack-dev-server --progress --hot --port 3004 --open",
     "build": "NODE_ENV=production webpack"
   },
   "devDependencies": {

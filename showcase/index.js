@@ -18,7 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import ComplexChart from './plot/complex-chart';
+import ComplexChartMotions from './plot/complex-chart-motions';
+import ComplexChartEvents from './plot/complex-chart-events';
+
 import LineChart from './plot/line-chart';
 import LineChartManyColors from './color/line-chart-many-colors';
 import LineChartCanvas from './plot/line-chart-canvas';
@@ -129,7 +131,8 @@ import SimpleTreemap from './treemap/simple-treemap';
 import TreemapExample from './treemap/dynamic-treemap';
 
 export const showCase = {
-  ComplexChart,
+  ComplexChartMotions,
+  ComplexChartEvents,
   LineChart,
   LineChartManyColors,
   LineChartCanvas,
