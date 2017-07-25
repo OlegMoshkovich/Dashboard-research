@@ -21,6 +21,10 @@
 import ComplexChartMotions from './plot/complex-chart-motions';
 import ComplexChartEvents from './plot/complex-chart-events';
 
+import AnimationExampleFalls from './misc/animation-example-falls';
+import AnimationExampleStruckBy from './misc/animation-example-struckBy';
+
+
 import LineChart from './plot/line-chart';
 import LineChartManyColors from './color/line-chart-many-colors';
 import LineChartCanvas from './plot/line-chart-canvas';
@@ -133,6 +137,8 @@ import TreemapExample from './treemap/dynamic-treemap';
 export const showCase = {
   ComplexChartMotions,
   ComplexChartEvents,
+  AnimationExampleFalls,
+  AnimationExampleStruckBy,
   LineChart,
   LineChartManyColors,
   LineChartCanvas,

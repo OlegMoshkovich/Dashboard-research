@@ -3,6 +3,8 @@ import {mapSection} from '../showcase-components/showcase-utils';
 import {showCase} from '../index';
 const {
   AnimationExample,
+  AnimationExampleFalls,
+  AnimationExampleStruckBy,
   LabelSeriesExample,
   GradientExample,
   SyncedCharts,
@@ -11,26 +13,26 @@ const {
   VoronoiLineChart
 } = showCase;
 
-const MISC = [  {
-
+const MISC = [{
   component: AnimationExample,
-  docsLink: 'http://uber.github.io/react-vis/#/documentation/overview/animation'
-},{
-
+  },{
   component: AnimationExample,
-  docsLink: 'http://uber.github.io/react-vis/#/documentation/overview/animation'
-},{
-  name: 'Daily Patterns - MultiDimensional space',
-  component: VoronoiLineChart
-}
-];
+}];
 
 class MiscShowcase extends Component {
   render() {
+
     return (
+      <div>
       <article id="misc">
-        {MISC.map(mapSection)}
+        <section >
+        <AnimationExampleFalls data = {this.props.data}/>
+        </section >
+        <section >
+        <AnimationExampleStruckBy data = {this.props.data}/>
+        </section >
       </article>
+    </div>
     );
   }
 }

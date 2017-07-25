@@ -18,36 +18,19 @@ const PLOTS = [{
 }
 ];
 
-
-
 class PlotsShowcase extends Component {
 
   render() {
-
     return (
-
-
       <article id="plots">
         <h2>Data</h2>
-
-
-
         <section >
-
-
-          <h3>{'Motions'}</h3>
-            <ComplexChartMotions data = {this.props.data}/>
-
-          <h3>{'Events'}</h3>
-            <ComplexChartEvents data = {this.props.data}/>
-
-
-      </section>
-
+            <h3>{'Motions'}</h3>
+              <ComplexChartMotions data = {this.props.data}/>
+            <h3>{'Events'}</h3>
+              <ComplexChartEvents data = {this.props.data}/>
+        </section>
       </article>
-
-
-
     );
   }
 }

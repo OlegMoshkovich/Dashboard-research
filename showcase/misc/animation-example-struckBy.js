@@ -25,14 +25,33 @@ import {
   XYPlot,
   XAxis,
   YAxis,
+  makeWidthFlexible,
   VerticalGridLines,
   HorizontalGridLines,
   MarkSeries
 } from 'index';
 
-function generateData() {
-  return [...new Array(10)].map(row => ({x: Math.random() * 5, y: Math.random() * 10}));
+const FlexibleXYPlot = makeWidthFlexible(XYPlot);
+
+
+
+function processData(data,motion) {
+  var dataVis =[];
+   for (var i = 0; i < 10; i++){
+
+     var datapoint = {
+       'i':i,
+       'x':data[i][motion],
+       'y':data[i]["struckBy"]
+     }
+     dataVis.push(datapoint)
+   }
+
+  return dataVis
 }
+
+var i=0;
+
 
 const MODE = [
   'noWobble',
@@ -40,12 +59,42 @@ const MODE = [
   'wobbly',
   'stiff'
 ];
+const name = [
+  'falls',
+  'twists',
+  'squats',
+  'trips',
+  'reaches',
+  'slips'
+];
+
+function setName(){
+  i=i+1
+  console.log('number:' + i)
+  console.log('name:' + name[i])
+  if (i==5){
+    i=0
+  }
+  return name[i]
+}
+
+
 
 export default class Example extends React.Component {
-  state = {
-    data: generateData(),
-    modeIndex: 0
-  }
+  constructor(props) {
+    super(props);
+      this.state = {
+        componentName:this.props.name,
+        motion:'falls',
+        data: this.props.data.Pattern,
+        modeIndex: 0,
+        name: name,
+        i:0
+      }
+
+}
+
+
 
   updateModeIndex = increment => () => {
     const newIndex = this.state.modeIndex + (increment ? 1 : -1);
@@ -56,27 +105,25 @@ export default class Example extends React.Component {
   }
 
   render() {
+
     const {modeIndex, data} = this.state;
     return (
-      <div className="centered-and-flexed">
-        <div className="centered-and-flexed-controls">
-          <ShowcaseButton onClick={this.updateModeIndex(false)} buttonContent={'PREV'} />
-          <div> {`ANIMATION TECHNIQUE: ${MODE[modeIndex]}`} </div>
-          <ShowcaseButton onClick={this.updateModeIndex(true)} buttonContent={'NEXT'} />
-        </div>
+      <div className="centered-and-flexed-controls">
         <XYPlot
-          width={300}
+          width={400}
           height={300}>
           <VerticalGridLines />
           <HorizontalGridLines />
           <XAxis />
           <YAxis />
-          <MarkSeries
-            animation={MODE[modeIndex]}
-            data={data}/>
+            <MarkSeries
+        animation={'wobbly'}
+        data={processData(this.state.data,this.state.motion)}/>
         </XYPlot>
-        <ShowcaseButton onClick={() => this.setState({data: generateData()})} buttonContent={'UPDATE DATA'} />
-      </div>
+
+        <ShowcaseButton onClick={() => this.setState({motion:setName()})} buttonContent={this.state.motion} />
+
+    </div>
     );
   }
 }

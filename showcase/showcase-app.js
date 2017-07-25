@@ -179,10 +179,10 @@ processResults(error, queryResults) {
           </article>
 
 
-            <PlotsShowcase forExample={forExample}
-              data = {data}/>
+            <PlotsShowcase forExample={forExample} data = {data}/>
             <RadialShowcase  />
             <MiscShowcase   data = {data}/>
+
             <article>Sample of data interrogation toolset</article>
 
 
