@@ -31,23 +31,28 @@ export default class SimpleRadialChart extends Component {
   }
   render() {
     const {value} = this.state;
+    console.log(value);
     return (
       <RadialChart
         className={'donut-chart-example'}
-        innerRadius={100}
+        innerRadius={70}
         radius={140}
         data={[
-          {angle: 2, className: 'custom-class'},
-          {angle: 6},
-          {angle: 2},
-          {angle: 3},
-          {angle: 1}
+          {angle: 0.319445,label: 'Slips'},
+          {angle: 0.219434,label: 'Slips'},
+          {angle: 0.196965,label: 'Slips'},
+          {angle: 0.143882,label: 'Slips'},
+          {angle: 0.043137,label: 'Slips'},
+          {angle: 0.014971,label: 'Slips'}
         ]}
-        onValueMouseOver={v => this.setState({value: v})}
+        onValueMouseOver={v => this.setState({value: g})}
         onSeriesMouseOut={v => this.setState({value: false})}
+
         width={300}
         height={300}>
+
         {value && <Hint value={value}/>}
+
       </RadialChart>
     );
   }

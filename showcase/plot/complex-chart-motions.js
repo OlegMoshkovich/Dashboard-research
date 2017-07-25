@@ -25,10 +25,12 @@ import {
   XAxis,
   YAxis,
   HorizontalGridLines,
+  VerticalGridLines,
   makeWidthFlexible,
   LineSeries,
   VerticalRectSeries,
   DiscreteColorLegend,
+  SearchableDiscreteColorLegend,
   Crosshair
 } from 'index';
 
@@ -42,29 +44,56 @@ export default class Example extends React.Component {
 
 
     this.state = {
+
       series: [
         {
           title: 'Bends',
           disabled: false,
-          data: this.props.data.Bends
+          data: this.props.data.Bends,
+          color:"#3a3",
+          style:{
+                  strokeLinejoin: 'round',
+                  strokeWidth: 2,
+                  stroke:"#3a3"
+                }
         },
         {
           title: 'Squats',
-          disabled: true,
-          data: this.props.data.Squats
+          disabled:true,
+          data: this.props.data.Squats,
+          color:'#337',
+          style:{
+                  strokeLinejoin: 'round',
+                  strokeWidth: 2,
+                  stroke:'#337'
+                }
         },
         {
           title: 'Twists',
           disabled: true,
-          data: this.props.data.Twists
+          data: this.props.data.Twists,
+          color:'#f93',
+          style:{
+                  strokeLinejoin: 'round',
+                  strokeWidth: 2,
+                  stroke:'#f93'
+                }
         },
         {
           title: 'Reaches',
           disabled: true,
-          data: this.props.data.Reaches
+          data: this.props.data.Reaches,
+          color:'#766',
+          style:{
+                  strokeLinejoin: 'round',
+                  strokeWidth: 2,
+                  stroke:'#766'
+                }
         }
 
       ]
+
+
 
     };
 
@@ -80,7 +109,7 @@ export default class Example extends React.Component {
   }
 
   render() {
-    console.log(this.props.data);
+
     const {series} = this.state;
     return (
 
@@ -93,12 +122,16 @@ export default class Example extends React.Component {
             items={series}/>
         </div>
 
+
+
         <div className="chart">
 
           <FlexibleXYPlot
             animation
             height={300}>
             <HorizontalGridLines />
+            <VerticalGridLines
+              tickValues={this.props.data.TickValues}/>
 
             <YAxis
               className="cool-custom-name"
@@ -107,7 +140,10 @@ export default class Example extends React.Component {
             />
 
             <XAxis
+              tickValues={this.props.data.TickValues}
+              tickFormat={v => `Worker ${v}`} tickLabelAngle={-50}
               className="even-cooler-custom-name"
+              tickValues={this.props.data.TickValues}
               tickSizeInner={0}
               tickSizeOuter={8}
             />
@@ -115,22 +151,26 @@ export default class Example extends React.Component {
 
             <LineSeries
               data={series[0].data}
-              curve="curveMonotoneX"
+
+              style={series[0].style}
               {...(series[0].disabled ? {opacity: 0.08} : null)}/>
 
             <LineSeries
               data={series[1].data}
-              curve="curveMonotoneX"
+              style={series[1].style}
+
               {...(series[1].disabled ? {opacity: 0.08} : null)}/>
 
             <LineSeries
               data={series[2].data}
-              curve="curveMonotoneX"
+              style={series[2].style}
+
               {...(series[2].disabled ? {opacity: 0.08} : null)}/>
 
             <LineSeries
               data={series[3].data}
-              curve="curveMonotoneX"
+              style={series[3].style}
+
               {...(series[3].disabled ? {opacity: 0.08} : null)}/>
 
 

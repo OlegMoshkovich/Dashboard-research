@@ -8,11 +8,16 @@ const {
   SimpleRadialChart
 } = showCase;
 
-const RADIAL = [ {
-  name: 'Falls',
-  component: CustomRadiusRadialChart
+const RADIAL = [{
+  name: 'Simple Radial Chart',
+  component: SimpleRadialChart,
+  sourceLink: 'https://github.com/uber/react-vis/blob/master/src/radial-chart/index.js',
+  docsLink: 'http://uber.github.io/react-vis/#/documentation/other-charts/radial-chart'
 }, {
-  name: 'StruckBy',
+  name: 'Simple Donut Chart',
+  component: DonutChartExample
+}, {
+  name: 'Custom Radius',
   component: CustomRadiusRadialChart
 }];
 
@@ -20,7 +25,7 @@ class RadialShowcase extends Component {
   render() {
     return (
       <article id="radial-charts">
-        <h2>Correlations</h2>
+        <h1>Radial Chart</h1>
         {RADIAL.map(mapSection)}
       </article>
     );

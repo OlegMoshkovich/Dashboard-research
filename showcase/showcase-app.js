@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import AxesShowcase from './showcase-sections/axes-showcase';
 import PlotsShowcase from './showcase-sections/plots-showcase';
+import ScatterShowcase from './showcase-sections/plots-showcase-scatter';
 import SunburstSection from './showcase-sections/sunburst-showcase';
 import RadialShowcase from './showcase-sections/radial-showcase';
 import RadarShowcase from './showcase-sections/radar-showcase';
@@ -25,8 +26,6 @@ class App extends Component {
   componentWillMount() {
   json(`${'https://sheetsu.com/apis/v1.0/04d703afe90a'}`,
     this.processResults);
-
-
 }
 
 processResults(error, queryResults) {
@@ -40,6 +39,9 @@ processResults(error, queryResults) {
       const workerStruckBys = [];
       const workerSlips = [];
       const workerTrips = [];
+      const tickValue = [];
+      const workerPattern =[];
+
 
       var i;
       queryResults.map(function(worker){
@@ -57,9 +59,22 @@ processResults(error, queryResults) {
             worker.RiskLevel = Number(worker.RiskLevel)
             })
 
-      console.log(queryResults[1]);
 
-      for (i = 0; i < 50; i++){
+      for (i = 1; i < 11; i++){
+
+        tickValue.push(i);
+
+
+      var pattern={
+        'bends':queryResults[i].Bends,
+        'twists':queryResults[i].Twists,
+        'squats':queryResults[i].Squats,
+        'reaches':queryResults[i].Reaches,
+        'falls':queryResults[i].Falls,
+        'struckBy':queryResults[i].StruckBy,
+        'trips':queryResults[i].Trips,
+        'slips':queryResults[i].Slips
+      }
       var bends={
         'i':i,
         'x':i,
@@ -103,6 +118,10 @@ processResults(error, queryResults) {
         'y':queryResults[i].Slips
       }
 
+
+
+
+
       workerSquats.push(squats)
       workerReaches.push(reaches)
       workerTwists.push(twists)
@@ -111,6 +130,8 @@ processResults(error, queryResults) {
       workerStruckBys.push(struckBys)
       workerTrips.push(trips)
       workerSlips.push(slips)
+      workerPattern.push(pattern)
+
 
       }
 
@@ -124,7 +145,10 @@ processResults(error, queryResults) {
       'StruckBys':workerStruckBys,
       'Slips':workerSlips,
       'Trips':workerTrips,
+      'TickValues':tickValue,
+      'Pattern':workerPattern
       }
+
 
       this.setState({data});
 
@@ -143,12 +167,27 @@ processResults(error, queryResults) {
             <div className="header-contents">
               <a className="header-logo" href="#">HCS + DPR Pilot</a>
               <nav>
-                <li><a href="#plots">Baseline</a></li>
+                <li><a href="#">Baseline</a></li>
+                <li><a href="#">Report #1</a></li>
+                <li><a href="#">Report #2</a></li>
               </nav>
             </div>
           </header>)}
-          <PlotsShowcase forExample={forExample}
-            data = {data}/>
+
+          <article>Following visualizations present data collected in the baseline phase of the pilot ||
+          Some of the Graphs are interactive
+          </article>
+
+
+            <PlotsShowcase forExample={forExample}
+              data = {data}/>
+            <RadialShowcase  />
+            <MiscShowcase   data = {data}/>
+            <article>Sample of data interrogation toolset</article>
+
+
+
+
         </main>
       );
 

@@ -25,7 +25,7 @@ import ShowcaseButton from '../showcase-components/showcase-button';
 
 function randomLeaf() {
   return {
-    size: 30,
+    size: Math.random() * 1000,
     color: Math.random()
   };
 }

@@ -25,20 +25,14 @@ import {
   XYPlot,
   XAxis,
   YAxis,
-  makeWidthFlexible,
   VerticalGridLines,
   HorizontalGridLines,
   MarkSeries
 } from 'index';
 
-const FlexibleXYPlot = makeWidthFlexible(XYPlot);
-
-
 function generateData() {
   return [...new Array(10)].map(row => ({x: Math.random() * 5, y: Math.random() * 10}));
 }
-
-
 
 const MODE = [
   'noWobble',
@@ -46,24 +40,11 @@ const MODE = [
   'wobbly',
   'stiff'
 ];
-const name = [
-  'StruckBy',
-  'Twist',
-  'Squats',
-  'Trips',
-  'Reaches',
-  'Slips'
-];
-
-
 
 export default class Example extends React.Component {
   state = {
-    componentName:this.props.name,
     data: generateData(),
-    modeIndex: 0,
-    name: name,
-    i:0
+    modeIndex: 0
   }
 
   updateModeIndex = increment => () => {
@@ -77,24 +58,25 @@ export default class Example extends React.Component {
   render() {
     const {modeIndex, data} = this.state;
     return (
-
-      <div className="centered-and-flexed-controls">
-
+      <div className="centered-and-flexed">
+        <div className="centered-and-flexed-controls">
+          <ShowcaseButton onClick={this.updateModeIndex(false)} buttonContent={'PREV'} />
+          <div> {`ANIMATION TECHNIQUE: ${MODE[modeIndex]}`} </div>
+          <ShowcaseButton onClick={this.updateModeIndex(true)} buttonContent={'NEXT'} />
+        </div>
         <XYPlot
-          width={400}
+          width={300}
           height={300}>
           <VerticalGridLines />
           <HorizontalGridLines />
           <XAxis />
           <YAxis />
           <MarkSeries
-            animation={'stiff'}
+            animation={MODE[modeIndex]}
             data={data}/>
         </XYPlot>
-
-        <ShowcaseButton onClick={() => this.setState({data: generateData()},this.state.i=this.state.i+1 )} buttonContent={this.state.name[this.state.i]} />
-
-    </div>
+        <ShowcaseButton onClick={() => this.setState({data: generateData()})} buttonContent={'UPDATE DATA'} />
+      </div>
     );
   }
 }

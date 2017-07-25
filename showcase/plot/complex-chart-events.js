@@ -20,17 +20,22 @@
 
 import React from 'react';
 
+
 import {
   XYPlot,
   XAxis,
   YAxis,
   HorizontalGridLines,
+  VerticalGridLines,
   makeWidthFlexible,
   LineSeries,
   VerticalRectSeries,
   DiscreteColorLegend,
-  Crosshair
+  Crosshair,
+  MarkSeries,
+  Hint
 } from 'index';
+
 
 const FlexibleXYPlot = makeWidthFlexible(XYPlot);
 
@@ -39,29 +44,53 @@ export default class Example extends React.Component {
 
   constructor(props) {
     super(props);
-    const totalValues = Math.random() * 50;
 
     this.state = {
+      value: null,
       series: [
         {
           title: 'Falls',
-          disabled: false,
-          data: this.props.data.Falls
+          disabled: true,
+          data: this.props.data.Falls,
+          color:"#3a3",
+          style:{
+                  strokeLinejoin: 'round',
+                  strokeWidth: 2,
+                  stroke:"#3a3"
+                }
         },
         {
           title: 'StruckBys',
           disabled:true,
-          data: this.props.data.StruckBys
+          data: this.props.data.StruckBys,
+          color:'#337',
+          style:{
+                  strokeLinejoin: 'round',
+                  strokeWidth: 2,
+                  stroke:'#337'
+                }
         },
         {
           title: 'Slips',
           disabled: true,
-          data: this.props.data.Slips
+          data: this.props.data.Slips,
+          color:'#f93',
+          style:{
+                  strokeLinejoin: 'round',
+                  strokeWidth: 2,
+                  stroke:'#f93'
+                }
         },
         {
           title: 'Trips',
-          disabled: true,
-          data: this.props.data.Trips
+          disabled: false,
+          data: this.props.data.Trips,
+          color:'#766',
+          style:{
+                  strokeLinejoin: 'round',
+                  strokeWidth: 2,
+                  stroke:'#766'
+                }
         }
 
       ]
@@ -69,6 +98,8 @@ export default class Example extends React.Component {
     };
 
      this._legendClickHandler = this._legendClickHandler.bind(this);
+     this._rememberValue = this._rememberValue.bind(this);
+     this._forgetValue = this._forgetValue.bind(this);
   }
 
 
@@ -78,10 +109,22 @@ export default class Example extends React.Component {
     series[i].disabled = !series[i].disabled;
     this.setState({series});
   }
+  _rememberValue(value) {
+    this.setState({value});
+  }
+
+  _forgetValue() {
+    this.setState({
+      value: null
+    });
+  }
 
   render() {
-    console.log(this.props.data);
-    const {series, crosshairValues} = this.state;
+
+    const {series, crosshairValues, value} = this.state;
+
+
+
     return (
 
       <div className="example-with-click-me">
@@ -96,9 +139,13 @@ export default class Example extends React.Component {
         <div className="chart">
 
           <FlexibleXYPlot
+            xType="linear"
             animation
             height={300}>
+
             <HorizontalGridLines />
+            <VerticalGridLines
+              tickValues={this.props.data.TickValues}/>
 
             <YAxis
               className="cool-custom-name"
@@ -107,32 +154,39 @@ export default class Example extends React.Component {
             />
 
             <XAxis
+              tickValues={this.props.data.TickValues}
+              tickFormat={v => `Worker ${v}`} tickLabelAngle={-50}
               className="even-cooler-custom-name"
               tickSizeInner={0}
               tickSizeOuter={8}
             />
 
 
+
+
             <LineSeries
               data={series[0].data}
-              curve="curveMonotoneX"
+              style={series[0].style}
+
               {...(series[0].disabled ? {opacity: 0.08} : null)}/>
 
             <LineSeries
               data={series[1].data}
-              curve="curveMonotoneX"
+              style={series[1].style}
+
               {...(series[1].disabled ? {opacity: 0.08} : null)}/>
 
             <LineSeries
               data={series[2].data}
-              curve="curveMonotoneX"
+              style={series[2].style}
+
               {...(series[2].disabled ? {opacity: 0.08} : null)}/>
 
             <LineSeries
               data={series[3].data}
-              curve="curveMonotoneX"
-              {...(series[3].disabled ? {opacity: 0.08} : null)}/>
+              style={series[3].style}
 
+              {...(series[3].disabled ? {opacity: 0.08} : null)}/>
 
 
           </FlexibleXYPlot>

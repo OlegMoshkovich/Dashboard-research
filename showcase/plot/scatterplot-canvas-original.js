@@ -27,13 +27,10 @@ import {
   YAxis,
   VerticalGridLines,
   HorizontalGridLines,
-  makeWidthFlexible,
   MarkSeries,
   MarkSeriesCanvas,
   Hint
 } from 'index';
-
-const FlexibleXYPlot = makeWidthFlexible(XYPlot);
 
 function getRandomData() {
   return (new Array(100)).fill(0).map(row => ({
@@ -72,7 +69,6 @@ export default class Example extends React.Component {
 
   render() {
     const {drawMode, data, colorType} = this.state;
-
     const markSeriesProps = {
       animation: true,
       className: 'mark-series-example',
@@ -88,16 +84,20 @@ export default class Example extends React.Component {
     return (
       <div className="canvas-wrapper">
         <div className="canvas-example-controls">
-
+          <div>{`MODE: ${mode}`}</div>
+          <ShowcaseButton
+            onClick={() => this.setState({drawMode: (drawMode + 1) % 2})}
+            buttonContent={nextModeContent[mode]} />
           <ShowcaseButton
             onClick={() => this.setState({data: getRandomData()})}
             buttonContent={'UPDATE DATA'} />
-
+          <ShowcaseButton
+            onClick={() => this.setState({colorType: nextType[colorType]})}
+            buttonContent={'UPDATE COLOR'} />
         </div>
-
-        <FlexibleXYPlot
-      
-            height={300}>
+        <XYPlot
+          width={600}
+          height={300}>
           <VerticalGridLines />
           <HorizontalGridLines />
           <XAxis />
@@ -106,12 +106,11 @@ export default class Example extends React.Component {
             <MarkSeriesCanvas {...markSeriesProps}/>}
           {mode === 'svg' &&
             <MarkSeries {...markSeriesProps}/>}
-
           {this.state.value ?
             <Hint value={this.state.value}/> :
             null
           }
-        </FlexibleXYPlot>
+        </XYPlot>
       </div>
     );
   }

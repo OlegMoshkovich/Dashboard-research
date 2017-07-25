@@ -23,38 +23,56 @@ import React, {Component} from 'react';
 import {
   CircularGridLines,
   RadialChart
+
 } from 'index';
 
 const DATA = [
   {
-    angle: 1,
-    id: 1,
-    radius: 10
-  },
-  {
-    angle: 2,
-    label: 'Super Custom label',
-    subLabel: 'With annotation',
+    angle: 0.319445,
     id: 2,
-    radius: 20
+    radius: 10,
+    color:'#19CDD7',
+    label: 'StruckBy'
   },
   {
-    angle: 5,
-    id: 3,
-    radius: 5,
-    label: 'Alt Label'
+    angle: 0.219434,
+    label: 'Twist',
+    color:'#DDB27C',
+    id: 10,
+    radius: 11
   },
   {
-    angle: 3,
+    angle: 0.196965,
     id: 4,
-    radius: 14
+    radius: 10,
+    color:'#88572C',
+    label: 'Squats'
   },
   {
-    angle: 5,
-    id: 5,
+    angle: 0.143882,
+    id: 4,
+    radius: 11,
+    color:'#FF991F',
+    subLabel: 'Trips'
+  },
+
+  {
+    angle: 0.043137,
+    id: 2,
+    radius: 9,
+    color:'#776E57',
+    label: 'Reaches'
+  },
+  {
+    angle: 0.014971,
+    id: 2,
     radius: 12,
-    subLabel: 'Sub Label only'
+    color:'#125C77',
+    label: 'Slips'
   }
+
+
+
 ];
 
 function mapData(hoveredSection) {
@@ -69,23 +87,28 @@ function mapData(hoveredSection) {
 
 export default class SimpleRadialChart extends Component {
   state = {
-    hoveredSection: false
+    hoveredSection: false,
+    value: false
   }
 
   render() {
-    const {hoveredSection} = this.state;
+    const {hoveredSection,value} = this.state;
     return (
       <RadialChart
-        animation
+
         showLabels
         radiusDomain={[0, 20]}
         data={mapData(hoveredSection)}
         labelsAboveChildren
-        onValueMouseOver={row => this.setState({hoveredSection: row.id})}
-        onMouseLeave={() => this.setState({hoveredSection: false})}
-        width={600}
+        colorType="literal"
+
+
+
+
+        width={500}
         height={300} >
-        <CircularGridLines tickTotal={20} rRange={[0, 150]}/>
+
+
       </RadialChart>
     );
   }

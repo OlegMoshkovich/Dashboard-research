@@ -82,7 +82,6 @@ export default class BasicSunburst extends React.Component {
     const {data, finalValue, pathValue} = this.state;
     return (
       <div className="basic-sunburst-example-wrapper">
-
         <Sunburst
           className="basic-sunburst-example"
           hideRootNode

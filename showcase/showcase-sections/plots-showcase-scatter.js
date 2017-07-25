@@ -9,6 +9,8 @@ const {
   LineChartManyColors,
   LineChartWithStyle,
   LineChartCanvas,
+  ScatterplotChart,
+  ScatterplotCanvas,
   LineMarkChart
 } = showCase;
 
@@ -28,7 +30,7 @@ class PlotsShowcase extends Component {
 
 
       <article id="plots">
-        <h2>Data</h2>
+        <h2>Clusters</h2>
 
 
 
@@ -36,10 +38,7 @@ class PlotsShowcase extends Component {
 
 
           <h3>{'Motions'}</h3>
-            <ComplexChartMotions data = {this.props.data}/>
-
-          <h3>{'Events'}</h3>
-            <ComplexChartEvents data = {this.props.data}/>
+            <ScatterplotCanvas/>
 
 
       </section>

@@ -25,12 +25,15 @@ import {
   XYPlot,
   XAxis,
   YAxis,
+  makeWidthFlexible,
   HorizontalGridLines,
   VerticalGridLines,
   LineSeries,
   MarkSeries,
   Voronoi
 } from 'index';
+
+const FlexibleXYPlot = makeWidthFlexible(XYPlot);
 
 const lines = [
   [
@@ -54,7 +57,7 @@ const lines = [
 ].map((p, i) => p.map(d => ({...d, line: i})));
 
 const margin = {top: 10, left: 40, bottom: 40, right: 10};
-const width = 300;
+const width = 900;
 const height = 300;
 
 const x = scaleLinear()
@@ -81,15 +84,15 @@ export default class Example extends React.Component {
             checked={showVoronoi}
             onChange={e => this.setState({showVoronoi: !showVoronoi})}
           />
-          Show Voronoi
+        Space Boundaries
         </label>
-        <XYPlot
+        <FlexibleXYPlot
           width={width}
           height={height}>
           <HorizontalGridLines />
           <VerticalGridLines />
-          <XAxis title="X Axis" />
-          <YAxis title="Y Axis" />
+          <XAxis title="Time" />
+          <YAxis title="Motions" />
           {lines.map((d, i) => (
             <LineSeries
               key={i}
@@ -113,7 +116,7 @@ export default class Example extends React.Component {
             x={d => x(d.x)}
             y={d => y(d.y)}
           />
-        </XYPlot>
+        </FlexibleXYPlot>
       </div>
     );
   }

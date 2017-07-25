@@ -52,7 +52,7 @@ export function getInnerDimensions(props, defaultMargins) {
     marginTop,
     marginRight,
     marginBottom,
-    innerHeight: height - marginBottom - marginTop,
+    innerHeight: height - marginBottom - marginTop -20,
     innerWidth: width - marginLeft - marginRight
   };
 }
